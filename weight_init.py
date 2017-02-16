@@ -25,6 +25,7 @@ for i in range(hidden_layer_size):
     x = activations[i-1]
 
   # w = np.random.randn(node_num, node_num) * 1
+  # Xavierの初期値の設定
   w = np.random.randn(node_num, node_num) / np.sqrt(node_num)
 
 
