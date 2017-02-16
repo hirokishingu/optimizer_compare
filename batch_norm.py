@@ -31,7 +31,7 @@ def __train(weight_init_std):
   epoch_cnt = 0
 
 
-  for i in range(10000):
+  for i in range(1000000000):
     batch_mask = np.random.choice(train_size, batch_size)
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
@@ -40,17 +40,17 @@ def __train(weight_init_std):
       grads = _network.gradient(x_batch, t_batch)
       optimizer.update(_network.params, grads)
 
-      if i % iter_per_epoch == 0:
-        train_acc = network.accuracy(x_train, t_train)
-        bn_train_acc = bn_network.accuracy(x_train, t_train)
-        train_acc_list.append(train_acc)
-        bn_train_acc_list.append(bn_train_acc)
+    if i % iter_per_epoch == 0:
+      train_acc = network.accuracy(x_train, t_train)
+      bn_train_acc = bn_network.accuracy(x_train, t_train)
+      train_acc_list.append(train_acc)
+      bn_train_acc_list.append(bn_train_acc)
 
-        print("epoch:" + str(epoch_cnt) + " | " + str(train_acc) + " - " + str(bn_train_acc))
+      print("epoch:" + str(epoch_cnt) + " | " + str(train_acc) + " - " + str(bn_train_acc))
 
-        epoch_cnt += 1
-        if epoch_cnt >= max_epochs:
-          break
+      epoch_cnt += 1
+      if epoch_cnt >= max_epochs:
+        break
 
   return train_acc_list, bn_train_acc_list
 
@@ -77,11 +77,11 @@ for i, w in enumerate(weight_scale_list):
     plt.yticks([])
   else:
     plt.ylabel("accuracy")
-    if i < 12:
-      plt.xticks([])
-    else:
-      plt.xlabel("epochs")
-    plt.legend(loc="lower right")
+  if i < 12:
+    plt.xticks([])
+  else:
+    plt.xlabel("epochs")
+  plt.legend(loc="lower right")
 
 plt.show()
 
