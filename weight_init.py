@@ -24,7 +24,9 @@ for i in range(hidden_layer_size):
   if i != 0:
     x = activations[i-1]
 
-  w = np.random.randn(node_num, node_num) * 1
+  # w = np.random.randn(node_num, node_num) * 1
+  w = np.random.randn(node_num, node_num) / np.sqrt(node_num)
+
 
   a = np.dot(x, w)
 
